@@ -32,8 +32,6 @@
 #include "docdisplaywindow.h"
 #include "network.h"
 
-#define g_numberOfDisks 15
-
 namespace Ui
 {
     class MainWindow;
@@ -79,7 +77,7 @@ private:
     Ui::MainWindow *ui;
     SioWorker *sio;
     bool shownFirstTime;
-    DiskWidgets diskWidgets[g_numberOfDisks];    //
+    DiskWidgets diskWidgets[DISK_COUNT];    //
     QLabel *speedLabel, *onOffLabel, *prtOnOffLabel, *netLabel, *clearMessagesLabel;  //
     TextPrinterWindow *textPrinterWindow;
     DocDisplayWindow *docDisplayWindow;    //
@@ -148,6 +146,7 @@ private slots:
     void on_actionQuit_triggered();
     void on_actionAbout_triggered();
     void on_actionDocumentation_triggered();
+
     void on_actionMountDisk_1_triggered();
     void on_actionMountDisk_2_triggered();
     void on_actionMountDisk_3_triggered();
@@ -162,7 +161,7 @@ private slots:
     void on_actionMountDisk_12_triggered();
     void on_actionMountDisk_13_triggered();
     void on_actionMountDisk_14_triggered();
-    void on_actionMountDisk_15_triggered();
+
     void on_actionMountFolder_1_triggered();
     void on_actionMountFolder_2_triggered();
     void on_actionMountFolder_3_triggered();
@@ -177,7 +176,7 @@ private slots:
     void on_actionMountFolder_12_triggered();
     void on_actionMountFolder_13_triggered();
     void on_actionMountFolder_14_triggered();
-    void on_actionMountFolder_15_triggered();
+
     void on_actionEject_1_triggered();
     void on_actionEject_2_triggered();
     void on_actionEject_3_triggered();
@@ -192,7 +191,7 @@ private slots:
     void on_actionEject_12_triggered();
     void on_actionEject_13_triggered();
     void on_actionEject_14_triggered();
-    void on_actionEject_15_triggered();
+
     void on_actionWriteProtect_1_triggered();
     void on_actionWriteProtect_2_triggered();
     void on_actionWriteProtect_3_triggered();
@@ -207,7 +206,7 @@ private slots:
     void on_actionWriteProtect_12_triggered();
     void on_actionWriteProtect_13_triggered();
     void on_actionWriteProtect_14_triggered();
-    void on_actionWriteProtect_15_triggered();
+
     void on_actionMountRecent_0_triggered();
     void on_actionMountRecent_1_triggered();
     void on_actionMountRecent_2_triggered();
@@ -218,6 +217,7 @@ private slots:
     void on_actionMountRecent_7_triggered();
     void on_actionMountRecent_8_triggered();
     void on_actionMountRecent_9_triggered();
+
     void on_actionEditDisk_1_triggered();
     void on_actionEditDisk_2_triggered();
     void on_actionEditDisk_3_triggered();
@@ -232,7 +232,7 @@ private slots:
     void on_actionEditDisk_12_triggered();
     void on_actionEditDisk_13_triggered();
     void on_actionEditDisk_14_triggered();
-    void on_actionEditDisk_15_triggered();
+
     void on_actionSave_1_triggered();
     void on_actionSave_2_triggered();
     void on_actionSave_3_triggered();
@@ -247,7 +247,7 @@ private slots:
     void on_actionSave_12_triggered();
     void on_actionSave_13_triggered();
     void on_actionSave_14_triggered();
-    void on_actionSave_15_triggered();
+
     void on_actionAutoSave_1_triggered();
     void on_actionAutoSave_2_triggered();
     void on_actionAutoSave_3_triggered();
@@ -262,7 +262,7 @@ private slots:
     void on_actionAutoSave_12_triggered();
     void on_actionAutoSave_13_triggered();
     void on_actionAutoSave_14_triggered();
-    void on_actionAutoSave_15_triggered();
+
     void on_actionSaveAs_1_triggered();
     void on_actionSaveAs_2_triggered();
     void on_actionSaveAs_3_triggered();
@@ -277,7 +277,7 @@ private slots:
     void on_actionSaveAs_12_triggered();
     void on_actionSaveAs_13_triggered();
     void on_actionSaveAs_14_triggered();
-    void on_actionSaveAs_15_triggered();
+
     void on_actionRevert_1_triggered();
     void on_actionRevert_2_triggered();
     void on_actionRevert_3_triggered();
@@ -292,7 +292,7 @@ private slots:
     void on_actionRevert_12_triggered();
     void on_actionRevert_13_triggered();
     void on_actionRevert_14_triggered();
-    void on_actionRevert_15_triggered();
+
     void on_actionBootOption_triggered();
     void on_actionToggleMiniMode_triggered();
     void on_actionToggleShade_triggered();
