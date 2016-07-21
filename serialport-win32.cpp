@@ -77,6 +77,11 @@ bool StandardSerialPortBackend::open()
             qCritical() << "!e" << tr("Cannot open serial port '%1': %2").arg(respeqtSettings->serialPortName(), lastErrorMessage());
             return false;
         }
+
+        if (!setHighSpeed()) {
+            close();
+            return false;
+        }
     }
     else
     {
@@ -101,16 +106,17 @@ bool StandardSerialPortBackend::open()
             qCritical() << "!e" << tr("Cannot clear DTR line in serial port '%1': %2").arg(respeqtSettings->serialPortName(), lastErrorMessage());
             return false;
         }
+
+        if (!setNormalSpeed()) {
+            close();
+            return false;
+        }
     }
 
     mCanceled = false;
 
     mCancelHandle = CreateEvent(0, true, false, 0);
 
-    if (!setNormalSpeed()) {
-        close();
-        return false;
-    }
 
     QString m;
     switch (mMethod) {
@@ -166,12 +172,13 @@ void StandardSerialPortBackend::cancel()
 int StandardSerialPortBackend::speedByte()
 {
 //    qDebug() << "!d" << tr("DBG -- Serial Port speedByte...");
-
-    if (respeqtSettings->serialPortHandshakingMethod()==HANDSHAKE_SOFTWARE) {
-        return 0x28; // standard speed (19200)
-    } else if (respeqtSettings->serialPortUsePokeyDivisors()) {
+    if (    (respeqtSettings->serialPortHandshakingMethod()!=HANDSHAKE_SOFTWARE) &&
+            (respeqtSettings->serialPortUsePokeyDivisors()))
+    {
         return respeqtSettings->serialPortPokeyDivisor();
-    } else {
+    }
+    else
+    {
         int speed = 0x08;
         switch (respeqtSettings->serialPortMaximumSpeed()) {
         case 0:
@@ -197,9 +204,13 @@ bool StandardSerialPortBackend::setNormalSpeed()
 bool StandardSerialPortBackend::setHighSpeed()
 {
     mHighSpeed = true;
-    if (respeqtSettings->serialPortUsePokeyDivisors()) {
+    if (    (respeqtSettings->serialPortHandshakingMethod()!=HANDSHAKE_SOFTWARE) &&
+            (respeqtSettings->serialPortUsePokeyDivisors()))
+    {
         return setSpeed(divisorToBaud(respeqtSettings->serialPortPokeyDivisor()));
-    } else {
+    }
+    else
+    {
         int speed = 57600;
         switch (respeqtSettings->serialPortMaximumSpeed()) {
         case 0:

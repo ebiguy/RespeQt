@@ -96,8 +96,8 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     bool software_handshake = (respeqtSettings->serialPortHandshakingMethod()==HANDSHAKE_SOFTWARE);
     m_ui->serialPortWriteDelayLabel->setVisible(software_handshake);
     m_ui->serialPortWriteDelayCombo->setVisible(software_handshake);
-    m_ui->serialPortBaudLabel->setVisible(!software_handshake);
-    m_ui->serialPortBaudCombo->setVisible(!software_handshake);
+    m_ui->serialPortBaudLabel->setEnabled(software_handshake || !m_ui->serialPortUseDivisorsBox->isChecked());
+    m_ui->serialPortBaudCombo->setEnabled(software_handshake || !m_ui->serialPortUseDivisorsBox->isChecked());
     m_ui->serialPortUseDivisorsBox->setVisible(!software_handshake);
     m_ui->serialPortDivisorLabel->setVisible(!software_handshake);
     m_ui->serialPortDivisorEdit->setVisible(!software_handshake);
@@ -189,8 +189,8 @@ void OptionsDialog::on_serialPortHandshakeCombo_currentIndexChanged(int index)
     bool software_handshake = (index==HANDSHAKE_SOFTWARE);
     m_ui->serialPortWriteDelayLabel->setVisible(software_handshake);
     m_ui->serialPortWriteDelayCombo->setVisible(software_handshake);
-    m_ui->serialPortBaudLabel->setVisible(!software_handshake);
-    m_ui->serialPortBaudCombo->setVisible(!software_handshake);
+    m_ui->serialPortBaudLabel->setEnabled(software_handshake || !m_ui->serialPortUseDivisorsBox->isChecked());
+    m_ui->serialPortBaudCombo->setEnabled(software_handshake || !m_ui->serialPortUseDivisorsBox->isChecked());
     m_ui->serialPortUseDivisorsBox->setVisible(!software_handshake);
     m_ui->serialPortDivisorLabel->setVisible(!software_handshake);
     m_ui->serialPortDivisorEdit->setVisible(!software_handshake);
